@@ -1,4 +1,6 @@
-# Carma
+*Carma** 🚗 is a comprehensive car management system designed to streamline the management of vehicles, services, rentals, and customer interactions. Built using **ASP.NET Core MVC** 🖥️, **C#** 💻, **MySQL** 🗃️, and **HTML/CSS** 🎨, it enables efficient tracking of car information, service history 🔧, rental logs 🚙, and customer profiles 👥 for enhanced user experience and operational efficiency.
+
+Feel free to adjust as needed!
 ![Screenshot 2024-11-29 at 10 14 58 PM](https://github.com/user-attachments/assets/847f6176-1baf-4854-ab02-a747da7b3cca)
 <img width="1486" alt="Screenshot 2024-11-29 at 10 15 12 PM" src="https://github.com/user-attachments/assets/4c425a79-ce7e-4c5a-9d72-47af679fa2e6" />
 <img width="1486" alt="Screenshot 2024-11-29 at 10 15 35 PM" src="https://github.com/user-attachments/assets/1a9f37ae-13d9-4f4a-9c1e-5622d3df94a4" />
