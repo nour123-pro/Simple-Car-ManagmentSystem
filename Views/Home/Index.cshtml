@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="/css/will.css">
+<link href="https://fonts.cdnfonts.com/css/elegant-2" rel="stylesheet">
+
+<div class="eye" style="font-family: ELEGANT, sans-serif;">
+    <div class="left flex-column">
+        <nav class="navbar flex-row">
+            <h1>CarMa</h1>
+             @if (!User.Identity.IsAuthenticated)
+                    {
+             <a href="@Url.Action("Login", "User")" class="logintext" style="color: gray; border-bottom:2px solid gray; cursor:pointer; text-decoration: none;">login</a>
+             }
+        </nav>
+        <div>
+            <!-- Additional content here -->
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 70px; margin-top: 5rem; padding: 0; font-family: ELEGANT, sans-serif;">
+            <p style="margin: 0; padding: 0; font-size: 20px;">UNCOVER YOUR</p>
+            <div style="display: flex; flex-direction: row; align-items: center; gap: 0; padding: 0; margin: 0;">
+                <div style="width: 70px; height: 40px; border-radius: 20px; background-image: url('@Url.Content("~/images/wheel1.png")'); background-size: cover; background-position: center;"></div>
+                <!--<p style="margin: 0; padding: 0; font-weight: 900;">DREAM CAR</p>-->
+                <h1 id="it">
+                    <span class="word">Dream<span class="superscript">s</span> </span>
+                    <span class="word">Car</span>
+                </h1>
+            </div>
+        </div>
+        <div class="">
+            <p style="font-size: 20px;font-weight:800">CarMa: Revolutionize Your Car Management Experience</p>
+        </div>
+        <a class="button-86" role="button" href="@Url.Action("Login","User")">Browse </a>
+    </div>
+    <div class="right" style="background-image: url('@Url.Content("~/images/main.png")');">
+   
+</div>
+
+</div>

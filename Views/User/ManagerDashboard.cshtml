@@ -1,0 +1,147 @@
+@model CarManagmentSystem.Models.DashboardViewModel;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="~/css/ManagerDash.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<style>
+   
+    table th{
+        background-color: rgb(236, 231, 231);
+    }
+    table th, table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+</style>
+<body>
+   
+      <div class="container" style="border-radius: 15px;">
+        <div class="sidebar" style="border-radius: 15px;">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        Help & Center
+                    </a>
+                </li>
+            </ul>
+            <div class="team-management">
+                <h3>Team Management</h3>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("AddEmployee","User")">
+                            <i class="fas fa-user-tie"></i>
+                            Employees Add
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+            @await Html.PartialAsync("MainContainer")
+       
+        
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Bar chart for Car Counts by Brand
+            var carBrands = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CarCountsByBrand.Keys));
+            var carCounts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CarCountsByBrand.Values));
+
+            var ctx2 = document.getElementById('carBrandChart').getContext('2d');
+            var carBrandChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: carBrands, // Car brands as labels
+                    datasets: [{
+                        label: 'Number of Cars',
+                        data: carCounts, // Number of cars per brand
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Bar chart for Car Sales and Rentals by Brand
+            var brands = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CarsRentedByBrand.Keys));
+var carsRented = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CarsRentedByBrand.Values));
+var carsSold = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CarsSoldByBrand.Values));
+
+var ctx = document.getElementById('salesRentalChart').getContext('2d');
+var salesRentalChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: brands, // Car brands as labels
+        datasets: [{
+            label: 'Cars Rented',
+            data: carsRented, // Number of rented cars per brand
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Cars Sold',
+            data: carsSold, // Number of sold cars per brand
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+        });
+    </script>
+    <script>
+    console.log("Cars Rented by Brand:", @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CarsRentedByBrand)));
+    console.log("Cars Sold by Brand:", @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CarsSoldByBrand)));
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadView(actionName) {
+        $.ajax({
+            url: '/User/' + actionName,
+            type: 'GET',
+            success: function (result) {
+                $('#display-container').html(result);
+            },
+            error: function () {
+                alert('Error loading view');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

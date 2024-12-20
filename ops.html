@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Sales Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h2>Number of Cars Sold by Brand</h2>
+        <canvas id="carSalesChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('carSalesChart').getContext('2d');
+        const carSalesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Toyota', 
+                    'Ford', 
+                    'BMW', 
+                    'Mercedes', 
+                    'Audi', 
+                    'Honda'
+                ],
+                datasets: [{
+                    label: 'Number of Cars Sold',
+                    data: [150, 200, 100, 180, 120, 170],
+                    backgroundColor: [
+                        'rgba(74, 144, 226, 0.6)',
+                        'rgba(80, 227, 194, 0.6)',
+                        'rgba(245, 166, 35, 0.6)',
+                        'rgba(144, 19, 254, 0.6)',
+                        'rgba(184, 233, 134, 0.6)',
+                        'rgba(255, 111, 97, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(74, 144, 226, 1)',
+                        'rgba(80, 227, 194, 1)',
+                        'rgba(245, 166, 35, 1)',
+                        'rgba(144, 19, 254, 1)',
+                        'rgba(184, 233, 134, 1)',
+                        'rgba(255, 111, 97, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    barThickness: 40,
+                    hoverBackgroundColor: [
+                        'rgba(74, 144, 226, 0.8)',
+                        'rgba(80, 227, 194, 0.8)',
+                        'rgba(245, 166, 35, 0.8)',
+                        'rgba(144, 19, 254, 0.8)',
+                        'rgba(184, 233, 134, 0.8)',
+                        'rgba(255, 111, 97, 0.8)'
+                    ],
+                    hoverBorderColor: [
+                        'rgba(74, 144, 226, 1)',
+                        'rgba(80, 227, 194, 1)',
+                        'rgba(245, 166, 35, 1)',
+                        'rgba(144, 19, 254, 1)',
+                        'rgba(184, 233, 134, 1)',
+                        'rgba(255, 111, 97, 1)'
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#333',
+                            font: {
+                                size: 14,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#333',
+                            font: {
+                                size: 14,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#333',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: '#4a90e2',
+                        borderWidth: 1
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

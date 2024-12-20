@@ -1,0 +1,612 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   HR Management Platform
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+   body {
+            font-family: "Dream Avenue",sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar ul li a i {
+            margin-right: 10px;
+        }
+        .sidebar .team-management, .sidebar .list {
+            margin-top: 30px;
+        }
+        .sidebar .announcements {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+        .sidebar .announcements h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .sidebar .announcements p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .sidebar .announcements .reaction {
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .announcements .reaction img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f5f5f5;
+            overflow-y: auto;
+        }
+        .main-content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .main-content .header h1 {
+            font-size: 24px;
+        }
+        .main-content .header .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .main-content .header .search-bar input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .main-content .header .search-bar button {
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .main-content .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .main-content .dashboard .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+        }
+        .main-content .dashboard .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .main-content .dashboard .card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .main-content .dashboard .card .chart {
+            height: 150px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+        .main-content .dashboard .card .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .main-content .dashboard .card .table th, .main-content .dashboard .card .table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        .main-content .dashboard .card .table th {
+            background-color: #f0f0f0;
+        }
+        .main-content .dashboard .card .table td {
+            background-color: #fff;
+        }
+        .main-content .dashboard .card .table .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .main-content .dashboard .card .table .status.full-time {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        .main-content .dashboard .card .table .status.freelance {
+            background-color: #ff9800;
+            color: #fff;
+        }
+        .main-content .dashboard .card .bar-chart {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .main-content .dashboard .card .bar-chart .bar {
+            width: 20px;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(1) {
+            height: 80px;
+            background-color: #4a90e2;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(2) {
+            height: 60px;
+            background-color: #50e3c2;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(3) {
+            height: 40px;
+            background-color: #f5a623;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(4) {
+            height: 20px;
+            background-color: #9013fe;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(5) {
+            height: 100px;
+            background-color: #b8e986;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(6) {
+            height: 120px;
+            background-color: #4a90e2;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(7) {
+            height: 140px;
+            background-color: #50e3c2;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(8) {
+            height: 160px;
+            background-color: #f5a623;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(9) {
+            height: 180px;
+            background-color: #9013fe;
+        }
+        .main-content .dashboard .card .bar-chart .bar:nth-child(10) {
+            height: 200px;
+            background-color: #b8e986;
+        }
+        .chart-container2 {
+            width: 80%;
+            max-width: 600px;
+        }
+        .chart-container2 {
+            width: 80%;
+            max-width: 800px;
+            background-color: #382323;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <div class="sidebar">
+    <h2>
+     TurHR
+    </h2>
+    <ul>
+     <li>
+      <a href="#">
+       <i class="fas fa-tachometer-alt">
+       </i>
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <a href="#">
+       <i class="fas fa-project-diagram">
+       </i>
+       Projects
+      </a>
+     </li>
+     <li>
+      <a href="#">
+       <i class="fas fa-calendar-alt">
+       </i>
+       Calendar
+      </a>
+     </li>
+     <li>
+      <a href="#">
+       <i class="fas fa-user-alt">
+       </i>
+       Leave Management
+      </a>
+     </li>
+     <li>
+      <a href="#">
+       <i class="fas fa-cog">
+       </i>
+       Settings
+      </a>
+     </li>
+     <li>
+      <a href="#">
+       <i class="fas fa-question-circle">
+       </i>
+       Help &amp; Center
+      </a>
+     </li>
+    </ul>
+    <div class="team-management">
+     <h3>
+      Team Management
+     </h3>
+     <ul>
+      <li>
+       <a href="#">
+        <i class="fas fa-users">
+        </i>
+        Performance
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        <i class="fas fa-money-bill-wave">
+        </i>
+        Payrolls
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        <i class="fas fa-user-tie">
+        </i>
+        Employees
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        <i class="fas fa-briefcase">
+        </i>
+        Recruitment &amp; Hiring
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="list">
+     <h3>
+      List
+     </h3>
+     <ul>
+      <li>
+       <a href="#">
+        <i class="fas fa-info-circle">
+        </i>
+        Salary Information
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        <i class="fas fa-chart-pie">
+        </i>
+        Compensation Breakdown
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        <i class="fas fa-tasks">
+        </i>
+        Project-specific Data
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="announcements">
+     <h3>
+      Announcements
+     </h3>
+     <p>
+      Stay updated with TurHR
+     </p>
+     <p>
+      Created: Nov 2024
+     </p>
+     <div class="reaction">
+      <img alt="Reaction icon" height="20" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-oR69OkvZOfhdwg9TiBu7Mliv.png?st=2024-09-15T04%3A48%3A51Z&amp;se=2024-09-15T06%3A48%3A51Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-14T23%3A14%3A10Z&amp;ske=2024-09-15T23%3A14%3A10Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=ax5BGipmnRyFxcL9%2BmX3cUELi9GKM2RJaxbW8CnRNPA%3D" width="20"/>
+      <span>
+       Reacted by 5
+      </span>
+     </div>
+    </div>
+   </div>
+   <div class="main-content">
+    <div class="header">
+     <h1>
+      Good Morning, Turja Sen
+     </h1>
+     <div class="search-bar">
+      <input placeholder="Quick Search..." type="text"/>
+      <button>
+       Search
+      </button>
+     </div>
+    </div>
+    <div class="dashboard">
+     <div class="card">
+      <h3>
+       Total Employees
+      </h3>
+      <p>
+       150 Full-time Employees
+      </p>
+      <p>
+       50 Freelance Employees
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       Attendance Overview
+      </h3>
+      <p>
+       90%
+       <span style="color: green;">
+        +2.5%
+       </span>
+       since last week
+      </p>
+      <div class="chart">
+      </div>
+     </div>
+     <div class="card">
+      <h3>
+       Today Used Devices
+      </h3>
+      <p>
+       100 Overall
+      </p>
+      <p>
+       Macbook: 50
+      </p>
+      <p>
+       Windows: 30
+      </p>
+      <p>
+       Headphones: 20
+      </p>
+     </div>
+     <div class="card">
+        <div class="chart-container">
+            <canvas id="myBarChart"></canvas>
+        </div>
+     </div>
+     <div class="card">
+        <div class="chart-container">
+           
+            <canvas id="myBarChart2"></canvas>
+        </div>
+     </div>
+     <div class="card" style="flex: 1 1 100%;">
+      <h3>
+       All Employees
+      </h3>
+      <table class="table">
+       <thead>
+        <tr>
+         <th>
+          Employee ID
+         </th>
+         <th>
+          Employee Name
+         </th>
+         <th>
+          Email
+         </th>
+         <th>
+          Role
+         </th>
+         <th>
+          Status
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td>
+          TUR187219
+         </td>
+         <td>
+          Ahsan Tapader
+         </td>
+         <td>
+          ahsan.hr@gmail.com
+         </td>
+         <td>
+          Sr. UI/UX Designer
+         </td>
+         <td>
+          <span class="status full-time">
+           Full-time
+          </span>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          TUR187154
+         </td>
+         <td>
+          Waish Bin M.
+         </td>
+         <td>
+          waish.hr@gmail.com
+         </td>
+         <td>
+          Lead Product Designer
+         </td>
+         <td>
+          <span class="status full-time">
+           Full-time
+          </span>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          TUR187144
+         </td>
+         <td>
+          Kayes Ahmed
+         </td>
+         <td>
+          kayes.hr@gmail.com
+         </td>
+         <td>
+          UX Designer
+         </td>
+         <td>
+          <span class="status full-time">
+           Full-time
+          </span>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          TUR187481
+         </td>
+         <td>
+          Turja Sen Das
+         </td>
+         <td>
+          turja.hr@gmail.com
+         </td>
+         <td>
+          Mid UI Designer
+         </td>
+         <td>
+          <span class="status freelance">
+           Freelance
+          </span>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+  </div>
+ 
+ <script>
+    // First chart for Sales Data
+const ctx1 = document.getElementById('myBarChart').getContext('2d');
+const myBarChart1 = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [{
+            label: 'Sales',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Second chart for Number of Cars Sold per Brand
+const ctx2 = document.getElementById('myBarChart2').getContext('2d');
+const myBarChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['Toyota', 'Honda', 'Tesla', 'Ford', 'BMW', 'Mercedes-Benz'], // Replace with your car brands
+        datasets: [{
+            label: 'Cars Sold',
+            data: [50, 35, 25, 40, 30, 45], // Replace with the number of cars sold for each brand
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+</script>
+
+
+</body>
+</html>

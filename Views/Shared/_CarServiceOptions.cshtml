@@ -1,0 +1,112 @@
+@model CarManagmentSystem.Models.Car
+
+<div class="options">
+                            <!-- Static options -->
+                            <form method="post" asp-action="AddServices" class="options" asp-controller="Car" >
+                           <input type="hidden" name="CarId" value="@Model.CarId">
+                            <div class="option">
+                                <div style="display: flex;flex-direction: row;gap:10px">
+                                <h3>Fuel </h3>
+                                 <div style="width: 20px;height:40px;">
+                                      <img src="@Url.Content("~/images/icons/Fuel.png")" style="width: 100%;height:100%"  alt="">
+                                 </div>
+                                
+                                 </div>
+                             
+                                
+ 
+
+                                <select name="FuelType">
+                                    <option value="None">No selection</option>
+                                    <option value="Premium">Premium</option>
+                                    <option value="Regular">Regular</option>
+                                </select>
+                                <p class="price">$50.00</p>
+                            </div>
+                            <div class="option">
+                                
+                                  <div style="display: flex;flex-direction: row;gap:10px">
+                                <h3>Oil Change</h3>
+                                 <div style="width: 20px;height:40px;">
+                                      <img src="@Url.Content("~/images/icons/OilChange.png")" style="width: 100%;height:100%"  alt="">
+                                 </div>
+                                
+                                 </div>
+                                <select name="OilChangeType">
+                                    <option value="None">No selection</option>
+                                    <option value="Standrad">Standard</option>
+                                    <option value="FullSynthetic">Full Synthetic</option>
+                                </select>
+                                <p class="price">$75.00</p>
+                            </div>
+                            <div class="option">
+                                
+                                 <div style="display: flex;flex-direction: row;gap:10px">
+                               <h3>Genral Manatence</h3>
+                                 <div style="width: 20px;height:40px;">
+                                      <img src="@Url.Content("~/images/icons/GeneralMaintenance.png")" style="width: 100%;height:100%"  alt="">
+                                 </div>
+                                 </div>
+                                <select name="GeneralMaintenance">
+                                    <option value="None">No selection</option>
+                                    <option value="2years">2 Years</option>
+                                    <option value="3years">3 Years</option>
+                                </select>
+                                <p class="price">$500.00</p>
+                            </div>
+                            <div class="option">
+                                
+                                 <div style="display: flex;flex-direction: row;gap:10px">
+                               <h3>Battery Replace</h3>
+                                 <div style="width: 40px;height:40px;">
+                                    
+                                      <img src="@Url.Content("~/images/icons/BatteryReplacement.png")" style="width: 100%;height:100%"  alt="">
+                                 </div>
+                                 </div>
+                                <select name="BatteryReplacement">
+                                    <option value="None">No selection</option>
+                                    <option value="2years">2 Years</option>
+                                    <option value="2years">3 Years</option>
+                                </select>
+                                <p class="price">$500.00</p>
+                            </div>
+
+                            <div class="option">
+                                
+                                 <div style="display:flex;flex-direction: row;gap:10px">
+                               <h3>Tire Change</h3>
+                                 <div style="width: 50px;height:40px;">
+                                     
+                                      <img src="@Url.Content("~/images/icons/TireChange.png")"  style="width: 100%;height:100%"  alt="imaeh">
+                                 </div>
+                                 </div>
+                                <select name="TireChange">
+                                    <option value="None">No selection</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Premium">Premium</option>
+                                </select>
+                                <p class="price">$500.00</p>
+                            </div>
+                             <div class="option">
+                                
+                                 <div style="display:flex;flex-direction: row;gap:10px">
+                               <h3>Brake Check</h3>
+                                 <div style="width: 50px;height:40px;">
+                                     
+                                      <img src="@Url.Content("~/images/icons/BrakeCheck.png")"  style="width: 100%;height:100%"  alt="imaeh">
+                                 </div>
+                                 </div>
+                                <select name="BrakeCheck">
+                                    <option value="None">No selection</option>
+                                    <option value="Mannual">Mannual</option>
+                                    <option value="Electric">Electric</option>
+                                </select>
+                                <p class="price">$500.00</p>
+                            </div>
+                            <div class="rotate-btn" style="width: 80px; height: 90px; color: white; border-radius: 30px; display: flex; flex-direction: column; justify-content: center;">
+                                  <button type="submit" class="btn outline push" style="background: none; border: none; padding: 0;">
+                                        <img src="@Url.Content("~/images/icons/push-button.png")" width="100%" height="100%" alt="Submit">
+                                   </button>
+                            </div>
+                            </form>
+                        </div>

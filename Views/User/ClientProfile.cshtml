@@ -1,0 +1,131 @@
+@model CarManagmentSystem.Models.Client
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+      table th{
+        background-color: rgb(236, 231, 231);
+    }
+    table th, table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+</style>
+<div class="container" style="background-color: white;border-radius: 15px;display:flex;flex-direction:column;justify-content: center;align-items:center">
+<h2>@Model.FirstName @Model.LastName  <i class="fas fa-camera"></i></h2>
+<p><i class="fas fa-envelope"></i>
+Email: @Model.Email</p>
+<p><i class="fas fa-phone"></i>
+Phone Number: @Model.PhoneNumber</p>
+
+<hr />
+
+<h3>Renting History <i class="fas fa-car-side"></i>
+</h3>
+@if (Model.RentalHistories.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Car Model</th>
+                <th>Rent Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rent in Model.RentalHistories)
+            {
+                <tr>
+                    <td>@rent.Car.Model</td> <!-- Access the Car Model -->
+                    <td>
+                          <div  style="display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            background-color: #4caf50;
+            color: #fff;
+            ">       @rent.RentalDate.ToString("dd/MM/yyyy")</div>
+                        
+                        
+                   
+                        
+                        
+                        
+                        </td>
+                    <td>
+                     <div style="display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+              background-color: #ff0000;
+            color: #ffffff;
+            " > @rent.ReturnDate?.ToString("dd/MM/yyyy")
+                                                
+                                               
+                                            </div>
+                    
+                    
+                    </td> 
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No renting history available.</p>
+}
+
+
+
+
+@if (Model.BuyerHistories.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Buyer Name</th>
+                <th>Purchase Date</th>
+                <th>Car Model</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var buyer in Model.BuyerHistories)
+            {
+                <tr>
+                    <td>
+                        <div style="display: inline-block;
+                                    padding: 5px 10px;
+                                    border-radius: 5px;
+                                    font-size: 12px;
+                                    background-color: #2196f3;
+                                    color: #fff;">
+                            @buyer.Car.Model
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display: inline-block;
+                                    padding: 5px 10px;
+                                    border-radius: 5px;
+                                    font-size: 12px;
+                                    background-color: #4caf50;
+                                    color: #fff;">
+                            @buyer.PurchaseDate.ToString("dd/MM/yyyy")
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display: inline-block;
+                                    padding: 5px 10px;
+                                    border-radius: 5px;
+                                    font-size: 12px;
+                                    background-color: #ff9800;
+                                    color: #fff;">
+                            hhh
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+</div>

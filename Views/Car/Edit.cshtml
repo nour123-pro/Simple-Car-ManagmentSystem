@@ -1,0 +1,99 @@
+@model CarManagmentSystem.Models.Car
+<style>
+    .her{
+        width: 100%;
+        height: 100%;
+        
+        display: flex;
+        flex-direction: row;
+        
+        align-items: center;
+        justify-content: center;
+    }
+    form{
+        display:flex;
+        justify-content: space-between;
+        width: 500px;
+        
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        border-left: 2px double white;
+        border-right: 2px double white;
+        align-self: center;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+         border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        
+        
+    }
+
+    .form-group{
+        width:100px;
+        height: 200px;
+    }
+    .last{
+        align-items: center;
+        
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+</style>
+
+<div class="her">
+    <h1 style="font-size: 56px;">Edit</h1>
+<form asp-action="Edit" method="post" asp-route-carid="@Model.CarId">
+    <div class="form-group">
+        <label asp-for="Model"></label>
+        <input asp-for="Model" class="form-control" placeholder="Model" />
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Year"></label>
+        <input asp-for="Year" class="form-control" placeholder="Year"/>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" placeholder="Price"/>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Mileage"></label>
+        <input asp-for="Mileage" class="form-control" placeholder="Milage"/>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="FuelType"></label>
+        <input asp-for="FuelType" class="form-control" placeholder="FuelType"/>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Transmission"></label>
+        <input asp-for="Transmission" class="form-control" placeholder="TransmissonType"/>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Color"></label>
+        <input asp-for="Color" class="form-control" placeholder="color" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Brand">Select Brand</label>
+        @Html.DropDownListFor(model => model.BrandId, (SelectList)ViewBag.Brands, "-- Select Brand --", new { @class = "form-control" })
+    </div>
+   
+    <div class="rotate-btn last">
+                                  <button type="submit" class="btn outline push" style="background: none; border: none; padding: 0;">
+                                        <img src="@Url.Content("~/images/icons/push-button.png")" width="40px" height="40px" alt="Submit">
+                    </button>
+    </div>
+    
+</form>
+<h1 style="color: aliceblue;font-size: 56px;">CAR</h1>
+</div>

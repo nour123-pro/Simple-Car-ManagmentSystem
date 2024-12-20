@@ -1,0 +1,50 @@
+{
+  "Version": 1,
+  "Hash": "1SwnDQv5WKe1st2Ac4pH+3U/3MovcIdzTat/pLsUY2c=",
+  "Source": "CarManagmentSystem",
+  "BasePath": "_content/CarManagmentSystem",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [
+    {
+      "Identity": "/Users/nourhammoud/Desktop/SimBrains Internship/Car/CarManagmentSystem 2/obj/Debug/net8.0/scopedcss/bundle/CarManagmentSystem.styles.css",
+      "SourceId": "CarManagmentSystem",
+      "SourceType": "Computed",
+      "ContentRoot": "/Users/nourhammoud/Desktop/SimBrains Internship/Car/CarManagmentSystem 2/obj/Debug/net8.0/scopedcss/bundle/",
+      "BasePath": "_content/CarManagmentSystem",
+      "RelativePath": "CarManagmentSystem.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/nourhammoud/Desktop/SimBrains Internship/Car/CarManagmentSystem 2/obj/Debug/net8.0/scopedcss/bundle/CarManagmentSystem.styles.css"
+    },
+    {
+      "Identity": "/Users/nourhammoud/Desktop/SimBrains Internship/Car/CarManagmentSystem 2/obj/Debug/net8.0/scopedcss/projectbundle/CarManagmentSystem.bundle.scp.css",
+      "SourceId": "CarManagmentSystem",
+      "SourceType": "Computed",
+      "ContentRoot": "/Users/nourhammoud/Desktop/SimBrains Internship/Car/CarManagmentSystem 2/obj/Debug/net8.0/scopedcss/projectbundle/",
+      "BasePath": "_content/CarManagmentSystem",
+      "RelativePath": "CarManagmentSystem.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/nourhammoud/Desktop/SimBrains Internship/Car/CarManagmentSystem 2/obj/Debug/net8.0/scopedcss/projectbundle/CarManagmentSystem.bundle.scp.css"
+    }
+  ]
+}

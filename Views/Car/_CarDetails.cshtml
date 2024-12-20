@@ -1,0 +1,103 @@
+@model CarManagmentSystem.Models.Car
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+   <div class="containerinfo" style="background-color:rgb(17, 17, 22);width:50%;display:flex;flex-direction: row;align-items: center;justify-content: center;border-radius: 15px;">
+           <div class="container2 mt-5">
+                <div class="wrapper mb-5">
+                    
+                    <h1 class="CarName">@Model.Model (@Model.Year)</h1>
+                    <h2 style="color: bisque;">@Model.Brand.BrandName</h2>
+                    <p class="CarDetails" ><strong style="border-bottom: 2px solid blue";>price</strong>- $@Model.Price</p>
+                    <div class="button-wrapper mt-3">
+                           <div class="container2 mt-5" style="width:100%">
+                <div class="wrapper " style="font-size: 20px;color:white;display:flex;flex-direction:column;width:100%">
+                    
+                    <p ><strong style="border-bottom: 2px solid blue;">Fuel Type:</strong> @Model.FuelType </p>
+                    <p><strong style="border-bottom: 2px solid blue";>MilAge</strong>- @Model.Mileage </p>
+                    <p class="CarDetails" > <strong style="border-bottom: 2px solid blue";>Color</strong>- @Model.Color</p>
+                    <p></p>
+                    <div class="button-wrapper mt-3">
+                    @if(User.Identity.IsAuthenticated){
+                       @if(User.IsInRole("Manager")){
+                                <a href="@Url.Action("Edit", "Car", new { carid = Model.CarId })" class="btn outline">Edit</a>
+                                <a href="@Url.Action("Delete","Car",new { carid=Model.CarId})" class="btn outline">Delete</a>
+                        }
+                       @if (User.Identity.IsAuthenticated && User.IsInRole("Client")) {
+    <a href="@Url.Action("BuyCar", "User", new { carid = Model.CarId })" class="btn outline">BUY NOW</a>
+    <a href="#" class="btn btn outline" onclick="showReturnDateInput('@Url.Action("RentCar","User", new { carid = Model.CarId })')">Rent Now</a>
+
+<!-- Hidden form for return date input -->
+<div id="returnDateForm" style="display:none;">
+  <input type="date" id="date" name="date" min=""/>
+<a href="#" id="confirmLink" class="btn btn-outline" style="color:white">Confirm</a>
+
+</div>
+
+}
+
+                    }else{
+                        <p style="color: white;">PLEASE LOG IN </p>
+                    }      
+                        </div>
+
+                </div>
+            </div>
+                        
+                  
+        </div>
+        <script>
+    function showReturnDateInput(url) {
+       
+        document.getElementById('returnDateForm').style.display = 'block';
+        
+       
+        document.getElementById('returnDateForm').dataset.url = url;
+    }
+
+    
+    
+</script>
+
+
+
+   <script>
+    $(document).ready(function () {
+        $('#confirmLink').click(function () {
+            var returnDate = $('#date').val();
+            var carId = @Model.CarId; 
+            if (!returnDate) {
+                alert('Please select a return date.');
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("RentCar", "User")', 
+                type: 'GET',
+                data: {
+                    carid: carId,
+                    date: returnDate
+                },
+                success: function (response) {
+                   
+                    alert('Rental recorded successfully.');
+                },
+                error: function (xhr, status, error) {
+                  
+                    alert('An error occurred: ' + error);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+       const today = new Date().toISOString().split('T')[0];
+    
+    
+    document.getElementById('date').setAttribute('min', today);
+    });
+   
+</script>
+
+
+

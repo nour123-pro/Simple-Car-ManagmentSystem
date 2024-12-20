@@ -1,0 +1,48 @@
+@model IEnumerable<CarManagmentSystem.Models.CarDto>
+@{
+    ViewData["Title"] = "Cars";
+    var brands = ViewData["Brands"] as List<CarManagmentSystem.Models.Brand>;
+}
+<link rel="stylesheet" href="~/css/CarIndex.css" asp-append-version="true" />
+<div class="parent" style="display: flex;flex-direction: column;align-items: center;">
+    <div class="filterbar flex-row" style="display: flex;flex-direction:row;width:fit-content;height:fit-content;gap:1rem;">
+        @foreach (var brand in brands)
+        {
+            <a href="@Url.Action("Index", "Car", new { brandId = brand.BrandId })" class="button-67">
+                <img src="@Url.Content($"~/images/icons/{brand.BrandName}.png")" alt="@brand.BrandName">
+            </a>
+        }
+        @if(User.IsInRole("Manager")&&User.Identity.IsAuthenticated){
+              <a class="button-86"  href="@Url.Action("Add", "Car")" >Add Car</a>
+        }
+      
+    </div>
+
+    <div class="big">
+        @foreach (var car in Model)
+        {
+            <div class="container mt-5">
+                <div class="wrapper mb-5">
+                    <div class="banner-image">
+                        @if (car.CarImages.Any())
+                        {
+                            <img src="@Url.Content("~/" + car.CarImages.FirstOrDefault().ImageUrl)" style="width: 300px; height:200px" class="img-fluid">
+                        }
+                        else
+                        {
+                            <img src="~/images/default-car-image.jpg" style="width: 300px; height:200px" class="img-fluid" alt="Default Image">
+                        }
+                    </div>
+                    <h1 class="CarName">@car.Brand.BrandName @car.Model (@car.Year)</h1>
+                    <p class="CarDetails">@car.Color - $@car.Price</p>
+                    <div class="button-wrapper mt-3">
+                        <a href="@Url.Action("Details", "Car", new { id = car.CarId })" class="btn outline">DETAILS</a>
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Client")){
+                        <a href="@Url.Action("Details", "Car", new { id = car.CarId })" class="btn fill">BUY NOW</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

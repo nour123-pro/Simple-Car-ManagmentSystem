@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/nourhammoud/Desktop/SimBrains Internship/Car/CarManagmentSystem 2/obj/Debug/net8.0/scopedcss/projectbundle/CarManagmentSystem.bundle.scp.css",
+      "PackagePath": "staticwebassets/CarManagmentSystem.bundle.scp.css"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CarManagmentSystem.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.CarManagmentSystem.props",
+      "PackagePath": "build\\CarManagmentSystem.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.CarManagmentSystem.props",
+      "PackagePath": "buildMultiTargeting\\CarManagmentSystem.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.CarManagmentSystem.props",
+      "PackagePath": "buildTransitive\\CarManagmentSystem.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,255 @@
+@model CarManagmentSystem.Models.Car
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car History</title>
+    <style>
+        .history-container {
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Set max-width to ensure the container is not too wide */
+        }
+        
+        .history-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .tab-button {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .tab-button.active {
+            background: #333;
+            color: #fff;
+            border: 1px solid #333;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table thead {
+            background: #f0f0f0;
+        }
+        
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        table th {
+            font-weight: 700;
+        }
+    </style>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="history-container">
+        <h2>Car History for @Model.Model (@Model.Year)</h2>
+        <div class="history-tabs">
+            <button class="tab-button active" onclick="showTab('rentals')">Rentals</button>
+            <button class="tab-button" onclick="showTab('buyers')">Buyers</button>
+            <button class="tab-button" onclick="showTab('services')">Services</button>
+        </div>
+        
+        <div id="rentals" class="tab-content active">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rental ID</th>
+                        <th>Customer Name</th>
+                        <th>Rental Date</th>
+                        <th>Return Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.RentalHistories != null && Model.RentalHistories.Any())
+                    {
+                        @foreach (var rental in Model.RentalHistories)
+                        {
+                            <tr>
+                                <td>@rental.RentalId</td>
+                                <td>@rental.UserId</td> 
+                                <td>
+                               
+                                  
+                                            <div style="display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+              background-color: #ff9800;
+            color: #080505;
+            " >
+                                               
+                                               
+                                                  @rental.RentalDate.ToShortDateString()
+                                            </div>
+                                          
+                                            
+        
+                                
+                                  
+                                </td>
+                                <td>
+                                    
+                                  
+                                            <div style="display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+              background-color: #5c0000;
+            color: #ffffff;
+            " >
+                                               
+                                               
+                                                  @rental.ReturnDate?.ToShortDateString()
+                                            </div>
+                                    
+                                    
+                                    
+                                    
+                                    </td> 
+                                <td>@rental.RentalPrice</td> 
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">No rentals available.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="buyers" class="tab-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Buyer ID</th>
+                        <th>Customer Name</th>
+                        <th>Purchase Date</th>
+                        <th>Price</th>
+                        <th>Payment Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.BuyerHistories != null && Model.BuyerHistories.Any())
+                    {
+                        @foreach (var buyer in Model.BuyerHistories)
+                        {
+                            <tr>
+                                <td>@buyer.HistoryId</td>
+                                <td>@buyer.UserId</td> 
+                                <td>@buyer.PurchaseDate.ToShortDateString()</td>
+                                <td>@buyer.Price</td> 
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">No buyers available.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="services" class="tab-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service ID</th>
+                        <th>Car Id</th>
+                        <th>Service Type</th>
+                        
+                        <th>Service Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ServiceHistories != null && Model.ServiceHistories.Any())
+                    {
+                        @foreach (var service in Model.ServiceHistories)
+                        {
+                            <tr>
+                                <td>@service.ServiceId</td>
+                                <td>@service.CarId</td> 
+                                <td >@service.ServiceType</td>
+                                <td>
+                                   
+                                        <div style="display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+              background-color: #5c0000;
+            color: #ffffff;
+            " >
+                                               
+                                               
+                                                  @service.ServiceDate.ToShortDateString()
+                                            </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    </td>
+                                
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">No services available.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+
+</html>
